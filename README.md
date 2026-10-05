@@ -1,14 +1,14 @@
-# 📚 StudyMate
+ 📚 StudyMate
 
 StudyMate is a web-based study management application designed to help students organize their academic activities in one place.
 
-## 🎯 Problem Statement
+🎯 Problem Statement
 
 Students often manage subjects, topics, assignments, and study schedules separately. This can make it difficult to track pending work and monitor study progress.
 
 StudyMate provides a simple platform where students can organize their studies, manage tasks, and plan their study sessions.
 
-## 🚀 Features
+Features
 
 - 👤 User Registration and Login
 - 🔐 Session-based Authentication
@@ -22,27 +22,27 @@ StudyMate provides a simple platform where students can organize their studies, 
 - 🚪 Secure Logout
 - 🎨 User-friendly Interface
 
-## 🛠️ Technologies Used
+ 🛠️ Technologies Used
 
-### Frontend
+ Frontend
 - HTML
 - CSS
 - JavaScript
 - Chart.js
 
-### Backend
+ Backend
 - Python
 - Flask
 
-### Database
+ Database
 - SQLite
 
-### Development Tools
+ Development Tools
 - Visual Studio Code
 - Python Virtual Environment
 - Git and GitHub
 
-## 📂 Project Structure
+📂 Project Structure
 
 ```text
 StudyMate/
