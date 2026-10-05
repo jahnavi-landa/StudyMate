@@ -1,0 +1,17 @@
+@app.route("/delete_subject/<int:subject_id>")
+def delete_subject(subject_id):
+
+    if "user_id" not in session:
+        return redirect(url_for("login"))
+
+    conn = sqlite3.connect("database.db")
+
+    conn.execute(
+        "DELETE FROM subjects WHERE id = ? AND user_id = ?",
+        (subject_id, session["user_id"])
+    )
+
+    conn.commit()
+    conn.close()
+
+    return redirect(url_for("subjects"))

@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tasks - StudyMate</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #dbeafe, #ede9fe, #fce7f3);
+            color: #333;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            color: white;
+            padding: 28px 40px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
+
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            font-size: 16px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 35px auto;
+        }
+
+        .title {
+            margin-bottom: 25px;
+        }
+
+        .title h2 {
+            color: #243b53;
+            margin-bottom: 8px;
+        }
+
+        .title p {
+            color: #555;
+        }
+
+        .form-box,
+        .tasks-box {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            border-top: 4px solid #6366f1;
+            margin-bottom: 25px;
+        }
+
+        .form-box h3,
+        .tasks-box h3 {
+            margin-bottom: 20px;
+            color: #243b53;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #444;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 15px;
+            background: white;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #6366f1;
+        }
+
+        .button-row {
+            margin-top: 20px;
+        }
+
+        .add-button {
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            color: white;
+            border: none;
+            padding: 13px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        .add-button:hover {
+            opacity: 0.9;
+        }
+
+        .task {
+            padding: 18px;
+            margin-bottom: 14px;
+            background: #f8fafc;
+            border-radius: 9px;
+            border-left: 5px solid #6366f1;
+        }
+
+        .task-main {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .task-info {
+            flex: 1;
+        }
+
+        .task-name {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 7px;
+        }
+
+        .subject {
+            color: #6366f1;
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            align-items: center;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .priority-low {
+            background: #dcfce7;
+            color: #15803d;
+        }
+
+        .priority-medium {
+            background: #fef3c7;
+            color: #b45309;
+        }
+
+        .priority-high {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        .status-pending {
+            background: #fef3c7;
+            color: #b45309;
+        }
+
+        .status-completed {
+            background: #dcfce7;
+            color: #15803d;
+        }
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: flex-end;
+        }
+
+        .actions a {
+            text-decoration: none;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .complete-button {
+            background: #dcfce7;
+            color: #15803d;
+        }
+
+        .edit-button {
+            background: #e0e7ff;
+            color: #4338ca;
+        }
+
+        .delete-button {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        .actions a:hover {
+            opacity: 0.8;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 30px;
+            color: #777;
+        }
+
+        .back {
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        .back a {
+            display: inline-block;
+            background: #243b53;
+            color: white;
+            text-decoration: none;
+            padding: 12px 22px;
+            border-radius: 8px;
+        }
+
+        .back a:hover {
+            background: #102a43;
+        }
+
+        @media (max-width: 750px) {
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .task-main {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .actions {
+                justify-content: flex-start;
+            }
+
+            .header {
+                padding: 22px;
+            }
+
+            .container {
+                width: 94%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <h1>📚 StudyMate</h1>
+        <p>Create tasks, set priorities and track your study progress</p>
+    </div>
+
+    <div class="container">
+
+        <div class="title">
+            <h2>✅ My Tasks</h2>
+            <p>Manage your study tasks and complete them on time.</p>
+        </div>
+
+        <div class="form-box">
+
+            <h3>➕ Add New Task</h3>
+
+            <form method="POST" action="/tasks">
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+                        <label>Select Subject:</label>
+
+                        <select name="subject_id" required>
+
+                            {% for subject in subjects %}
+
+                                <option value="{{ subject[0] }}">
+                                    {{ subject[1] }}
+                                </option>
+
+                            {% endfor %}
+
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Task Name:</label>
+
+                        <input
+                            type="text"
+                            name="task_name"
+                            placeholder="Enter task name"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label>Due Date:</label>
+
+                        <input
+                            type="date"
+                            name="due_date"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label>Priority:</label>
+
+                        <select name="priority" required>
+                            <option value="Low">Low</option>
+                            <option value="Medium">Medium</option>
+                            <option value="High">High</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="button-row">
+
+                    <button type="submit" class="add-button">
+                        ➕ Add Task
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+        <div class="tasks-box">
+
+            <h3>📋 Your Tasks</h3>
+
+            {% if tasks %}
+
+                {% for task in tasks %}
+
+                    <div class="task">
+
+                        <div class="task-main">
+
+                            <div class="task-info">
+
+                                <div class="task-name">
+                                    📌 {{ task[2] }}
+                                </div>
+
+                                <div class="subject">
+                                    Subject: {{ task[3] }}
+                                </div>
+
+                                <div class="details">
+
+                                    <span>
+                                        📅 Due: {{ task[4] }}
+                                    </span>
+
+                                    {% if task[5] == "High" %}
+                                        <span class="badge priority-high">
+                                            High Priority
+                                        </span>
+
+                                    {% elif task[5] == "Medium" %}
+                                        <span class="badge priority-medium">
+                                            Medium Priority
+                                        </span>
+
+                                    {% else %}
+                                        <span class="badge priority-low">
+                                            Low Priority
+                                        </span>
+                                    {% endif %}
+
+                                    {% if task[6] == "Completed" %}
+
+                                        <span class="badge status-completed">
+                                            ✅ Completed
+                                        </span>
+
+                                    {% else %}
+
+                                        <span class="badge status-pending">
+                                            ⏳ Pending
+                                        </span>
+
+                                    {% endif %}
+
+                                </div>
+
+                            </div>
+
+                            <div class="actions">
+
+                                {% if task[6] == "Pending" %}
+
+                                    <a
+                                        href="/complete_task/{{ task[0] }}"
+                                        class="complete-button"
+                                    >
+                                        ✅ Complete
+                                    </a>
+
+                                {% endif %}
+
+                                <a
+                                    href="/edit_task/{{ task[0] }}"
+                                    class="edit-button"
+                                >
+                                    ✏️ Edit
+                                </a>
+
+                                <a
+                                    href="/delete_task/{{ task[0] }}"
+                                    class="delete-button"
+                                    onclick="return confirm('Are you sure you want to delete this task?')"
+                                >
+                                    🗑️ Delete
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+
+            {% else %}
+
+                <div class="empty">
+                    <p>📭 No tasks added yet.</p>
+                    <p>Add your first study task above to get started.</p>
+                </div>
+
+            {% endif %}
+
+        </div>
+
+        <div class="back">
+            <a href="/dashboard">⬅️ Back to Dashboard</a>
+        </div>
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Edit Study Plan - StudyMate</title>
+</head>
+
+<body>
+
+    <h1>Edit Study Plan</h1>
+
+    <form method="POST">
+
+        <label>Subject:</label>
+
+        <select name="subject_id" required>
+
+            {% for subject in subjects %}
+
+                <option
+                    value="{{ subject[0] }}"
+                    {% if subject[0] == plan[1] %}selected{% endif %}
+                >
+                    {{ subject[1] }}
+                </option>
+
+            {% endfor %}
+
+        </select>
+
+        <br><br>
+
+        <label>Topic:</label>
+
+        <select name="topic_id" required>
+
+            {% for topic in topics %}
+
+                <option
+                    value="{{ topic[0] }}"
+                    {% if topic[0] == plan[2] %}selected{% endif %}
+                >
+                    {{ topic[2] }}
+                </option>
+
+            {% endfor %}
+
+        </select>
+
+        <br><br>
+
+        <label>Study Date:</label>
+
+        <input
+            type="date"
+            name="study_date"
+            value="{{ plan[3] }}"
+            required
+        >
+
+        <br><br>
+
+        <label>Start Time:</label>
+
+        <input
+            type="time"
+            name="start_time"
+            value="{{ plan[4] }}"
+            required
+        >
+
+        <br><br>
+
+        <label>Duration (hours):</label>
+
+        <input
+            type="number"
+            name="duration"
+            min="1"
+            max="12"
+            value="{{ plan[5] }}"
+            required
+        >
+
+        <br><br>
+
+        <button type="submit">Update Study Plan</button>
+
+    </form>
+
+    <br>
+
+    <a href="/study-planner">Back to Study Planner</a>
+
+</body>
+
+</html>

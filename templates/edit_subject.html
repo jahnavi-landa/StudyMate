@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Subject - StudyMate</title>
+</head>
+<body>
+
+    <h1>Edit Subject</h1>
+
+    <form method="POST">
+
+        <label>Subject Name:</label>
+
+        <input
+            type="text"
+            name="subject_name"
+            value="{{ subject[1] }}"
+            required
+        >
+
+        <button type="submit">Update Subject</button>
+
+    </form>
+
+    <br>
+
+    <a href="/subjects">Back to Subjects</a>
+
+</body>
+</html>

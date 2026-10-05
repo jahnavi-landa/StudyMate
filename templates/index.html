@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>StudyMate - Smart Study Planner</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        nav {
+            height: 75px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 8%;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .nav-buttons a {
+            text-decoration: none;
+            color: white;
+            margin-left: 20px;
+            padding: 10px 20px;
+            border-radius: 20px;
+        }
+
+        .login {
+            border: 1px solid white;
+        }
+
+        .register {
+            background: white;
+            color: #667eea !important;
+            font-weight: bold;
+        }
+
+        .hero {
+            min-height: calc(100vh - 75px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 58px;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            color: #ffe082;
+        }
+
+        .hero p {
+            font-size: 20px;
+            line-height: 1.7;
+            margin-bottom: 35px;
+            opacity: 0.95;
+        }
+
+        .start-btn {
+            display: inline-block;
+            background: white;
+            color: #667eea;
+            text-decoration: none;
+            padding: 15px 35px;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: bold;
+            margin: 8px;
+        }
+
+        .login-btn {
+            display: inline-block;
+            border: 2px solid white;
+            color: white;
+            text-decoration: none;
+            padding: 13px 35px;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: bold;
+            margin: 8px;
+        }
+
+        .features {
+            margin-top: 45px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .feature {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 18px 25px;
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
+        }
+
+        .feature h3 {
+            margin-bottom: 6px;
+        }
+
+        .feature p {
+            font-size: 14px;
+            margin: 0;
+        }
+
+        @media (max-width: 600px) {
+            .hero h1 {
+                font-size: 40px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            nav {
+                padding: 0 5%;
+            }
+
+            .nav-buttons a {
+                padding: 8px 12px;
+                margin-left: 5px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo">📚 StudyMate</div>
+
+        <div class="nav-buttons">
+            <a href="/login" class="login">Login</a>
+            <a href="/register" class="register">Register</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <h1>Welcome to <span>StudyMate</span></h1>
+
+            <p>
+                Your simple and smart study companion.
+                Organize subjects, manage topics, track tasks,
+                and create your personalized study schedule.
+            </p>
+
+            <a href="/register" class="start-btn">
+                Get Started 🚀
+            </a>
+
+            <a href="/login" class="login-btn">
+                Login
+            </a>
+
+            <div class="features">
+
+                <div class="feature">
+                    <h3>📚 Subjects</h3>
+                    <p>Organize your subjects</p>
+                </div>
+
+                <div class="feature">
+                    <h3>📝 Tasks</h3>
+                    <p>Track your study tasks</p>
+                </div>
+
+                <div class="feature">
+                    <h3>📅 Planner</h3>
+                    <p>Plan your study time</p>
+                </div>
+
+                <div class="feature">
+                    <h3>📊 Progress</h3>
+                    <p>Monitor your progress</p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</body>
+</html>

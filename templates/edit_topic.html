@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Topic - StudyMate</title>
+</head>
+<body>
+
+    <h1>Edit Topic</h1>
+
+    <form method="POST">
+
+        <label>Topic Name:</label>
+
+        <input
+            type="text"
+            name="topic_name"
+            value="{{ topic[3] }}"
+            required
+        >
+
+        <button type="submit">Update Topic</button>
+
+    </form>
+
+    <br>
+
+    <a href="/topics">Back to Topics</a>
+
+</body>
+</html>

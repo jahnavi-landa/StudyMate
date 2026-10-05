@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Study Planner - StudyMate</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #dbeafe, #ede9fe, #fce7f3);
+            color: #333;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            color: white;
+            padding: 28px 40px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
+
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            font-size: 16px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 35px auto;
+        }
+
+        .title {
+            margin-bottom: 25px;
+        }
+
+        .title h2 {
+            color: #243b53;
+            margin-bottom: 8px;
+        }
+
+        .title p {
+            color: #555;
+        }
+
+        .form-box,
+        .plans-box {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            border-top: 4px solid #6366f1;
+            margin-bottom: 25px;
+        }
+
+        .form-box h3,
+        .plans-box h3 {
+            margin-bottom: 20px;
+            color: #243b53;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #444;
+        }
+
+        .form-group select,
+        .form-group input {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 15px;
+            background: white;
+        }
+
+        .form-group select:focus,
+        .form-group input:focus {
+            outline: none;
+            border-color: #6366f1;
+        }
+
+        .button-row {
+            margin-top: 20px;
+        }
+
+        .add-button {
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            color: white;
+            border: none;
+            padding: 13px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        .add-button:hover {
+            opacity: 0.9;
+        }
+
+        .plan {
+            background: #f8fafc;
+            border-left: 5px solid #6366f1;
+            border-radius: 9px;
+            padding: 18px;
+            margin-bottom: 15px;
+        }
+
+        .plan-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 12px;
+        }
+
+        .plan-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .topic {
+            color: #6366f1;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .plan-details {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .detail {
+            background: white;
+            padding: 10px;
+            border-radius: 7px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .detail strong {
+            display: block;
+            color: #333;
+            margin-bottom: 4px;
+        }
+
+        .actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .edit-button {
+            display: inline-block;
+            text-decoration: none;
+            background: #e0e7ff;
+            color: #4338ca;
+            padding: 8px 15px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .delete-button {
+            background: #fee2e2;
+            color: #dc2626;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .edit-button:hover,
+        .delete-button:hover {
+            opacity: 0.8;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 30px;
+            color: #777;
+        }
+
+        .back {
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        .back a {
+            display: inline-block;
+            background: #243b53;
+            color: white;
+            text-decoration: none;
+            padding: 12px 22px;
+            border-radius: 8px;
+        }
+
+        .back a:hover {
+            background: #102a43;
+        }
+
+        @media (max-width: 700px) {
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .plan-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .plan-details {
+                grid-template-columns: 1fr;
+            }
+
+            .header {
+                padding: 22px;
+            }
+
+            .container {
+                width: 94%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <h1>📚 StudyMate</h1>
+        <p>Plan your study sessions and stay organized</p>
+    </div>
+
+    <div class="container">
+
+        <div class="title">
+            <h2>🗓️ Study Planner</h2>
+            <p>Create and manage your personalized study schedule.</p>
+        </div>
+
+        <div class="form-box">
+
+            <h3>➕ Create Study Plan</h3>
+
+            <form method="POST" action="/study-planner">
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+
+                        <label>Select Subject:</label>
+
+                        <select name="subject_id" required>
+
+                            {% for subject in subjects %}
+
+                                <option value="{{ subject[0] }}">
+                                    {{ subject[1] }}
+                                </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Select Topic:</label>
+
+                        <select name="topic_id" required>
+
+                            {% for topic in topics %}
+
+                                <option value="{{ topic[0] }}">
+                                    {{ topic[2] }}
+                                </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Study Date:</label>
+
+                        <input
+                            type="date"
+                            name="study_date"
+                            required
+                        >
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Start Time:</label>
+
+                        <input
+                            type="time"
+                            name="start_time"
+                            required
+                        >
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Duration (hours):</label>
+
+                        <input
+                            type="number"
+                            name="duration"
+                            min="1"
+                            max="12"
+                            placeholder="Example: 2"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+                <div class="button-row">
+
+                    <button type="submit" class="add-button">
+                        🗓️ Add Study Plan
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+        <div class="plans-box">
+
+            <h3>📋 My Study Plans</h3>
+
+            {% if study_plans %}
+
+                {% for plan in study_plans %}
+
+                    <div class="plan">
+
+                        <div class="plan-header">
+
+                            <div class="plan-title">
+                                📚 {{ plan[1] }}
+                            </div>
+
+                            <div class="topic">
+                                📖 {{ plan[2] }}
+                            </div>
+
+                        </div>
+
+                        <div class="plan-details">
+
+                            <div class="detail">
+                                <strong>📅 Study Date</strong>
+                                {{ plan[3] }}
+                            </div>
+
+                            <div class="detail">
+                                <strong>⏰ Start Time</strong>
+                                {{ plan[4] }}
+                            </div>
+
+                            <div class="detail">
+                                <strong>⏱️ Duration</strong>
+                                {{ plan[5] }} hour(s)
+                            </div>
+
+                        </div>
+
+                        <div class="actions">
+
+                            <a
+                                href="/edit_study_plan/{{ plan[0] }}"
+                                class="edit-button"
+                            >
+                                ✏️ Edit
+                            </a>
+
+                            <form
+                                method="POST"
+                                action="/delete_study_plan/{{ plan[0] }}"
+                                style="display:inline;"
+                            >
+
+                                <button
+                                    type="submit"
+                                    class="delete-button"
+                                    onclick="return confirm('Are you sure you want to delete this study plan?')"
+                                >
+                                    🗑️ Delete
+                                </button>
+
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+
+            {% else %}
+
+                <div class="empty">
+
+                    <p>📭 No study plans added yet.</p>
+
+                    <p>Create your first study plan above to get started.</p>
+
+                </div>
+
+            {% endif %}
+
+        </div>
+
+        <div class="back">
+            <a href="/dashboard">⬅️ Back to Dashboard</a>
+        </div>
+
+    </div>
+
+</body>
+</html>

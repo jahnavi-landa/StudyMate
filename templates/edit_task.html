@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Task - StudyMate</title>
+</head>
+<body>
+
+    <h1>Edit Task</h1>
+
+    <form method="POST">
+
+        <label>Task Name:</label>
+
+        <input
+            type="text"
+            name="task_name"
+            value="{{ task[1] }}"
+            required
+        >
+
+        <br><br>
+
+        <label>Due Date:</label>
+
+        <input
+            type="date"
+            name="due_date"
+            value="{{ task[2] }}"
+            required
+        >
+
+        <br><br>
+
+        <label>Priority:</label>
+
+        <select name="priority" required>
+
+            <option value="Low" {% if task[3] == "Low" %}selected{% endif %}>
+                Low
+            </option>
+
+            <option value="Medium" {% if task[3] == "Medium" %}selected{% endif %}>
+                Medium
+            </option>
+
+            <option value="High" {% if task[3] == "High" %}selected{% endif %}>
+                High
+            </option>
+
+        </select>
+
+        <br><br>
+
+        <button type="submit">Update Task</button>
+
+    </form>
+
+    <br>
+
+    <a href="/tasks">Back to Tasks</a>
+
+</body>
+</html>
